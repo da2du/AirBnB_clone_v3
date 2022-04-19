@@ -87,6 +87,7 @@ def update_pl(place_id):
     obj.save()
     return make_response(jsonify(obj.to_dict()), 200)
 
+
 @app_views.route('/places_search', methods=['POST'], strict_slashes=False)
 def place_search():
     """retrieves all Place objects"""

@@ -5,7 +5,7 @@ Contains the TestAmenityDocs classes
 
 from datetime import datetime
 import inspect
-#import models
+import models
 from models.amentiy import Amenity
 from models.base_model import BaseModel
 import pep8
