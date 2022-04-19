@@ -24,8 +24,8 @@ def get_ams(place_id):
     else:
         am = storage.all(Amenity)
         for a in am.values:
-        if ct.amenity_ids == a.id:
-            ct_list.append(a)
+            if ct.amenity_ids == a.id:
+                ct_list.append(a)
         return jsonify([p.to_dict() for p in ct_list])
 
 
