@@ -37,7 +37,7 @@ def get_onepl(place_id):
 @app_views.route("/places/<place_id>",
                  methods=["DELETE"],
                  strict_slashes=False)
-def delete_pl(place_id):
+def delete_pli(place_id):
     """Deletes place obj"""
     obj = storage.get(Place, place_id)
     if obj:
@@ -49,7 +49,7 @@ def delete_pl(place_id):
 
 @app_views.route('/cities/<city_id>/places', methods=['POST'],
                  strict_slashes=False)
-def new_pl(city_id):
+def new_pli(city_id):
     """creates a new place"""
     http_bd = request.get_json()
     st = storage.get(City, city_id)
@@ -72,7 +72,7 @@ def new_pl(city_id):
 
 @app_views.route('/places/<place_id>', methods=['PUT'],
                  strict_slashes=False)
-def update_pl(place_id):
+def update_pli(place_id):
     """updates a place"""
     http_bd = request.get_json()
     obj = storage.get(Place, place_id)
