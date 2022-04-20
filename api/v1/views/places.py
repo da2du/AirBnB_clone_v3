@@ -12,7 +12,7 @@ from models.user import User
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
-def get_pls(city_id):
+def get_plas(city_id):
     """returns list of places obj in city"""
     ct_list = []
     ct = storage.get(City, city_id)
@@ -27,7 +27,7 @@ def get_pls(city_id):
 
 @app_views.route('/places/<place_id>', methods=['GET'],
                  strict_slashes=False)
-def get_onepl(place_id):
+def get_onpl(place_id):
     """get place"""
     ct = storage.get(Place, place_id)
     if ct is None:
