@@ -14,6 +14,7 @@ from models.user import User
 classes = {"amenities": Amenity, "cities": City,
            "places": Place, "reviews": Review, "states": State, "users": User}
 
+
 @app_views.route('/status')
 def status():
     """returns a JSON"""
