@@ -16,7 +16,7 @@ def getUsers():
 
 @app_views.route('/users/<user_id>', methods=['GET'],
                  strict_slashes=False)
-def get_usid(user_id):
+def get_usid(user_id=None):
     """returns list of user obj"""
     us_list = storage.get(User, user_id)
     if us_list:
@@ -24,14 +24,16 @@ def get_usid(user_id):
     if us_list is None:
         abort(404)
 
+
 @app_views.route("/users/<user_id>", methods=["DELETE"], strict_slashes=False)
-def delete_us(user_id):
+def delete_us(user_id=None):
     """Deletes user obj"""
-    obj = storage.get(User, user_id)
-    if obj:
-        storage.delete(obj)
-        storage.save()
-        return make_response(jsonify({}), 200)
+    if user_id is not None:
+        obj = storage.get(User, user_id)
+        if obj:
+            storage.delete(obj)
+            storage.save()
+            return make_response(jsonify({}), 200)
     abort(404)
 
 
