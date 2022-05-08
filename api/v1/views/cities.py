@@ -60,7 +60,7 @@ def new_city(state_id):
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
-def update_ct(state_id):
+def update_ct(city_id):
     """updates a city"""
     http_bd = request.get_json()
     obj = storage.get(City, city_id)
