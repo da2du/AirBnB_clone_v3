@@ -10,19 +10,13 @@ from models.user import User
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 @app_views.route('/users/<user_id>', methods=['GET'],
                  strict_slashes=False)
-def get_us(user_id=None):
+def get_us(user_id):
     """returns list of user obj"""
-    if user_id is None:
-        us_list = []
-        for am in storage.all(User).values():
-            us_list.append(am.to_dict())
+    us_list = storage.get(User, user_id)
+    if us_list:
         return jsonify(us_list)
-    else:
-        us_list = storage.get(User, user_id)
-        if us_list is None:
-            abort(404)
-        return jsonify(us_list.to_dict())
-
+    if us_list is None:
+        abort(404)
 
 @app_views.route("/users/<user_id>", methods=["DELETE"], strict_slashes=False)
 def delete_us(user_id):
@@ -55,14 +49,17 @@ def new_us():
                  strict_slashes=False)
 def update_us(user_id):
     """updates a user"""
-    http_bd = request.get_json()
+    if user_id is None:
+        abort(404)
     obj = storage.get(User, user_id)
     if obj is None:
         abort(404)
-    if not http_bd or not isinstance(http_bd, dict):
-        abort(400, 'Not a JSON')
-    for key in http_bd.keys():
-        if key not in ['id', 'created_at', 'updated_at', 'state_id']:
-            setattr(obj, key, http_bd[key])
+
+    body = request.get_json()
+    if body is None:
+        abort(400, description='Not a JSON')
+    for key in body.keys():
+        if key not in ['id', 'created_at', 'updated_at', 'email']:
+            setattr(obj, key, body[key])
     obj.save()
     return make_response(jsonify(obj.to_dict()), 200)
