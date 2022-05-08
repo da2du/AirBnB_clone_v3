@@ -20,7 +20,7 @@ def get_usid(user_id=None):
     """returns list of user obj"""
     us_list = storage.get(User, user_id)
     if us_list:
-        return jsonify(us_list)
+        return jsonify(us_list.to_dict())
     if us_list is None:
         abort(404)
 
