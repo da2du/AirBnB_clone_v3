@@ -7,10 +7,16 @@ from models import storage
 from models.user import User
 
 
-@app_views.route('/users', methods=['GET'], strict_slashes=False)
 @app_views.route('/users/<user_id>', methods=['GET'],
                  strict_slashes=False)
-def get_us(user_id):
+def getUsers():
+    '''Gets all the User'''
+    users = storage.all(User)
+    return jsonify([user.to_dict() for user in users.values()])
+
+
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
+def get_usid(user_id):
     """returns list of user obj"""
     us_list = storage.get(User, user_id)
     if us_list:
