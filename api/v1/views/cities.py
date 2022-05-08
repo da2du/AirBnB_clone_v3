@@ -31,7 +31,7 @@ def get_one(city_id):
 
 
 @app_views.route("/cities/<city_id>", methods=["DELETE"], strict_slashes=False)
-def delete_ct(state_id):
+def delete_ct(city_id):
     """Deletes city obj"""
     obj = storage.get(City, city_id)
     if obj:
